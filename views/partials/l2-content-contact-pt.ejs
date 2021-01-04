@@ -1,0 +1,95 @@
+<div class="content-wrapper">
+  <div class="cntPageSubHeading"><h3><%= formTitle %></h3></div>
+  <% console.log(validFlag); if(validFlag === 1){ %>
+    <div id="formSubStatusTxt"><%= frmValdTxt %></div>
+    <hr class="my-4">
+    <% }else{%>
+
+    <% console.log(errors.length); if (errors.length !== 0){ %>
+    <div id="formErrMsg">
+      The following validation errors were encountered.
+
+
+      <% errors.forEach(function(error){ %>
+        <br>
+        <%= error.msg %>
+
+
+      <% }) %>
+    </div>
+    <% } %>
+
+    <div class="contact-form">
+      <form action="/contact/personal-training" method="post">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fName">First Name</label>
+            <input type="text" class="form-control" id="fName" name="fName" autocomplete="off">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="lName">Last Name</label>
+            <input type="text" class="form-control" id="lName" name="lName" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telephone Number</label>
+          <input type="tel" id="phone" name="phone" class="form-control" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="trainingCats">Please select the categories you are interested in.</label>
+          <select multiple class="form-control" id="trainingCats" name="trainingCats[]" autocomplete="off">
+          <option value="hiit">HIIT</option>
+          <option value="st">Strength Training</option>
+          <option value="hypertrophy">Hypertrophy</option>
+          <option value="wl">Weight Losss</option>
+          <option value="yoga">Yoga</option>
+          </select>
+          <small id="tCatsHelpTxt" class="form-text text-muted">
+            To select multiple categories, press and hold the shift key.
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea style="height: 200px" maxlength="2000" rows="10" cols="10" class="form-control" id="message" name="message" autocomplete="off"></textarea>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="notifPerm" name="notifPerm">
+          <label class="form-check-label" for="notifPerm" style="font-size: 14px; color: grey;">
+          Receive newsletters on personal training and nutrition.
+          </label>
+          </div>
+        </div>
+        <div class="submitBtnContainer">
+          <button type="submit" class="btn btn-lg btn-outline-dark submitButton align-center"><%= formSbtBtnTxt %></button>
+        </div>
+      </form>
+    <!-- Extended material form grid -->
+    <hr class="my-4">
+    </div>
+    <% } %>
+    <div class="row contact-form-sect2">
+    <div class="col-lg-4 square">
+
+    <i class="fas <%= nxtStp1IconName %> fa-5x"></i>
+    <p><%= nxtStp1Txt %></p>
+
+    </div>
+    <div class="col-lg-4 square">
+
+    <i class="fas <%= nxtStp2IconName %> fa-5x"></i>
+    <p><%= nxtStp2Txt %> </p>
+
+    </div>
+    <div class="col-lg-4 square">
+
+    <i class="fas <%= nxtStp3IconName %> fa-5x"></i>
+    <p> <%= nxtStp3Txt %> </p>
+
+    </div>
+  </div>
+</div>

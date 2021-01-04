@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<%- include('partials/l2-banner.ejs') %>
+<% if (typeof pageType == "undefined" || pageType == null || pageType==false){ %>
+<%- include('partials/l2-content-main.ejs') %>
+<% }else if(pageType === "services" ){%>
+<%- include('partials/l2-content-services.ejs') %>
+<% }else if(pageType === "pressCoverage"){ %>
+<%- include('partials/l2-content-press.ejs') %>
+<% } else if(pageType === "packages"){ %>
+<%- include('partials/l2-content-packages.ejs') %>
+<% } else if(pageType === "contact-pt"){ %>
+<%- include('partials/l2-content-contact-pt.ejs') %>
+<% } else if(pageType === "blog"){ %>
+<%- include('partials/l2-content-press.ejs') %>
+<% } else if(pageType === "corporate"){ %>
+<%- include('partials/l2-content-press.ejs') %>
+<% }else{ %>
+<%- include('partials/faqs.ejs') %>
+<% }%>
+
+<%- include('partials/footer') %>

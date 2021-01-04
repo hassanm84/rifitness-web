@@ -1,0 +1,9 @@
+<div class="content-wrapper">
+  <div class="jumbotron subjectPageJt">
+    <% subjectSections.forEach(function(section){ %>
+    <h2><%= section.title %></h2>
+    <p class="lead"><%- section.body%></p>
+     <hr class="my-4">
+    <% }) %>
+  </div>
+</div>

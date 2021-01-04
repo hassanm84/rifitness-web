@@ -1,0 +1,422 @@
+body{
+font-family: 'Noto Sans', sans-serif;
+}
+
+#formSubStatusTxt{
+
+}
+
+#formErrMsg{
+  color: red;
+  font-weight: bold;
+  font-size: 14px;
+  padding-bottom: 1%;
+
+}
+
+#message{
+ overflow-wrap: normal;
+ overflow-x: scroll;
+ wrap: hard !important;
+}
+
+#email, #phone, #fName, #lName, #trainingCats, #message  {
+    border-radius: 0;
+}
+
+.contact-form-sect2{
+  padding-left: 20%;
+  padding-right:20%;
+}
+
+
+
+.square:before{
+    content: "";
+    display: block;
+}
+
+.cntPageSubHeading{
+  padding-top: 2.5%;
+  padding-bottom:2.5%;
+}
+
+.contact-form{
+  text-align: left;
+  padding-left: 35%;
+  padding-right: 35%;
+
+  padding-top: 0.5%;
+}
+.pkg-plan-det{
+  text-align: justify;
+  font-weight: 300;
+  padding: 2.5%;
+    text-align: justify;
+}
+
+.pkg-cost{
+  padding: 10%;
+  text-align: center;
+}
+
+.card-img{
+  border: none !important;
+}
+.jumbotron{
+  margin-bottom: 0px !important;
+}
+
+.packages{
+  padding-left: 15%;
+  padding-right:15%;
+
+}
+
+.btnsInline{
+  padding: 1%;
+  display: inline-block;
+}
+
+.adjacentBtns{
+  margin: 5px;
+}
+
+.servOverviewRow{
+  margin: inherit !important;
+}
+
+.l2-sect-subhead-5{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.colTxtContainer{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.colImgContainer{
+  width: 100%;
+ object-fit: cover;
+ height: 350px; /* only if you want fixed height */
+}
+.fit-image{
+width: 100%;
+object-fit: cover;
+height: 350px; /* only if you want fixed height */
+}
+
+.servOverviewColLg{
+
+   height: 350px;
+
+}
+.servOverviewColSm{
+  background-color: #e9ecef;
+   height: 350px;
+}
+.servOverviewColSm h4{
+  font-family: 'Noto Sans', sans-serif;
+  text-transform: uppercase;
+
+}
+
+
+.subjectPageJt{
+  padding-left: 25% !important;
+  padding-right: 25% !important;
+}
+
+
+
+
+
+/**************FAQs*****************/
+
+.accordion-section .panel-default > .panel-heading {
+    border: 0;
+    background: #f4f4f4;
+    padding: 0;
+}
+.accordion-section .panel-default .panel-title a {
+    display: block;
+    font-size: 1.2rem;
+    color: #3590D5;
+    font-family: 'Noto Sans', sans-serif;
+}
+.accordion-section .panel-default .panel-title a:after {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    content: "\f067";
+    color: #1f7de2;
+    float: right;
+    margin-top: -12px;
+}
+.accordion-section .panel-default .panel-title a.collapsed:after {
+    content: "\f068";
+}
+.accordion-section .panel-default .panel-body {
+    font-size: 1.2rem;
+}
+
+.container{
+  margin-top: 1% !important;
+  margin-bottom: 1% !important;
+  font-family: 'Noto Sans', sans-serif !important;
+}
+
+
+.l2-sect-subhead{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.content-wrapper{
+  width: 100%;
+  clear: both;
+  font-family: 'Noto Sans', sans-serif;
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+
+.intro-banner-l2-txt{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: #fff;
+font-family: 'Noto Sans', sans-serif;
+text-transform: uppercase;
+ background-color: rgba(0, 0, 0, 0.25);
+}
+
+.intro-banner-l2{
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+}
+
+.card-img-overlay{
+  border: none !important;
+}
+.card{
+  border: none !important;
+}
+
+.main-text h1{
+  background: url(/img/ice.jpg) no-repeat center center;
+	background-size: cover;
+	color: #fff;
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+
+}
+
+.carousel-control-next, .carousel-control-prev{
+  top: auto !important;
+  bottom: auto !important;
+
+
+}
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: #000;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: #000;
+}
+
+
+#splashed-logo{
+width:100%;
+height: auto;
+padding:0.5%;
+}
+
+#journey-button{
+padding: 2%;
+}
+
+
+
+.linkButton{
+  border-radius: 0px !important;
+  border-width: medium !important;
+}
+
+.submitBtnContainer{
+  text-align: center;
+  padding: 1.5%;
+}
+
+.submitButton{
+  border-radius: 0px !important;
+  border-width: small !important;
+  font-size: 16px !important;
+}
+
+.nav-brands-img{
+  height:50px;
+  width:auto;
+}
+.nav-item{
+  padding: 0 10px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.125rem;
+  font-weight:bold;
+  text-transform: uppercase;
+}
+
+.btn-primary-outline {
+  background-color: transparent !important;
+  border-color: #fff !important;
+  border-width: medium !important;
+  border-radius: 0px !important;
+  color: #fff !important;
+  text-transform: uppercase;
+  font-size: 1.25rem !important;
+}
+
+.btn-primary-outline:hover {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+.w-100 {
+  object-fit: cover;
+  width: 100%;
+  height: 860px;
+}
+
+h1{
+font-size: 8rem !important;
+font-weight: bold !important;
+font
+
+}
+
+h2{
+font-size: 3rem !important;
+font-weight: 900px;
+}
+
+h3{
+font-family: 'Noto Sans', sans-serif !important;
+font-size: 1.5rem !important;
+line-height: 1.5rem !important;
+font-weight: 900 !important;
+text-transform: uppercase !important;
+}
+
+.main-text
+{
+  font-family: 'Noto Sans', sans-serif;
+  position: absolute;
+  top: 175px;
+  width: 100%;
+  color: #FFF;
+}
+.intro-container{
+  position: relative;
+}
+
+.summary{
+  width: 100%;
+  max-height: auto;
+}
+
+.fas{
+  color: #3590D5;
+  padding: 3%;
+}
+.fas:hover{
+  color: #000;
+}
+
+.feature-box{
+  padding: 5% 5%;
+  text-align: center;
+}
+
+.row.force-height>div {
+    height: 700px;
+}
+
+.card-img{
+  object-fit: cover;
+  width: 100%;
+  height: 800px;
+
+}
+
+.packages-text{
+  padding: 15% !important;
+  top: auto;
+  bottom: auto;
+}
+
+
+.marketing{
+  padding: 5% 5%;
+  text-align: center;
+  width: 100%;
+
+}
+
+.marketing p{
+  text-align: justify;
+}
+
+#testimonial-heading{
+}
+
+.review-box{
+  padding-right: 30px !important;
+  padding-left: 30px !important;
+  padding-top: 10px  !important;
+  height: 450px;
+
+}
+
+.featured-images{
+    margin-top:5%;
+    text-align: center;
+    width: 100%
+}
+
+
+.featured-img{
+ display: inline-block;
+ margin: 0 auto;
+ padding: 5px;
+ height: auto;
+ max-width: 100%;
+}
+
+
+
+.footer{
+  text-align:justify;
+  font-size: 15px;
+}
+
+#footer-cr-txt{
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.footer-row{
+  padding: 3%;
+}

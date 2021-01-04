@@ -1,0 +1,25 @@
+<section class="accordion-section clearfix mt-3" aria-label="Question Accordions">
+  <div class="container">
+	  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <% let i = 0; %>
+    <% faqs.forEach(function(item){ %>
+		<div class="panel panel-default">
+		  <div class="panel-heading p-3 mb-3" role="tab" id="heading<%= i %>">
+			<h3 class="panel-title">
+			  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>" aria-expanded="true"
+          aria-controls="collapse<%= i %>">
+				<%= item.question %>
+			  </a>
+			</h3>
+		  </div>
+		  <div id="collapse<%= i %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= i %>">
+			<div class="panel-body px-3 mb-4">
+			  <p><%= item.answer %></p>
+			</div>
+		  </div>
+		</div>
+    <% i++; %>
+    <% }); %>
+	  </div>
+  </div>
+</section>

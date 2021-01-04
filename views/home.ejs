@@ -1,0 +1,126 @@
+<%- include('partials/header') %>
+        <!--Slideshow-->
+        <div class="intro-container text-center">
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <div class="carousel-inner">
+                <% for(var i=0; i < bannerImages.length; i++){ %>
+                  <% if(i === 0){ %>
+                    <div class="carousel-item active">
+                  <%} else{ %>
+                    <div class="carousel-item">
+                  <% } %>
+                    <img class="d-block w-100" src="img/intro-banner-home/<%= bannerImages[i] %>" alt="First slide">
+                    </div>
+                <% } %>
+          </div>
+        <!--Intro text-->
+          <div class="main-text">
+            <h1><%= bannerHeading1%></h1>
+            <div id="splashed-logo"><img src="img/logo-wo-bg-so.png"/></div>
+            <h2><%= bannerHeading2 %></h2>
+            <h3><%= bannerHeading3 %></h3>
+            <div id="journey-button">
+              <a href="<%= bannerButtonLink %>" class="btn btn-primary-outline linkButton"><%= bannerButtonText %></a>
+            </div>
+          </div>
+        </div>
+
+    </section>
+
+
+    <!-- Summary -->
+    <section id="summary">
+      <div class="row summary">
+        <div class="col-lg-4 feature-box">
+          <i class="fas fa-dumbbell fa-9x"></i>
+          <h3 class="features-head"><%= sumPtHeading %></h3>
+          <p><%= sumPtSubHeading %></p>
+          <a href="<%= sumServDetBtnLnk %>" class="btn btn-lg btn-outline-dark linkButton"><%= sumDetailsButtonTxt %></a>
+          </div>
+
+          <div class="col-lg-4 feature-box">
+          <i class="fas fa-utensils fa-9x"></i>
+          <h3 class="features-head"><%= sumNutritionHeading %></h3>
+          <p><%= sumNutritionSubHeading %></p>
+          <a href="<%= sumNutDetBtnLnk %>" class="btn btn-lg btn-outline-dark linkButton"><%= sumDetailsButtonTxt %></a>
+          </div>
+
+          <div class="col-lg-4 feature-box">
+          <i class="fas fa-user-friends fa-9x"></i>
+          <h3 class="features-head"><%= sumWorkshopsHeading %></h3>
+          <p><%= sumWorkshopsSubHeading %></p>
+          <a href="<%= sumWrksDetBtnLnk %>" class="btn btn-lg btn-outline-dark linkButton"><%= sumDetailsButtonTxt %></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Packages Overview -->
+    <section id="packages" class="bg-coloured">
+      <div class="card bg-dark text-white border-0">
+        <img class="card-img" src="img/pexels-bruno-bueno-2204196.jpg" alt="Card image">
+        <div class="card-img-overlay text-center packages-text">
+          <h2><%= packagesHeading %></h2>
+          <div id="journey-button">
+            <a href="<%= pkgsBtnLnk %>" class="btn btn-lg btn-primary-outline linkButton"><%= packagesDetailBtnTxt %></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <div class="container marketing text-center">
+      <div id="testimonial-heading"><h3><%= testimonialsHeading %></h3></div>
+    <div class="intro-container text-center">
+      <div id="testimonials" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <% testimonialsSlide1.forEach(function(testimonial){ %>
+                <div class="col-lg-4 review-box">
+                  <img class="rounded-circle" src="img/testimonials/<%= testimonial.person.imageName %>"  width="120" height="120">
+                  <h4> "<%= testimonial.title %>"</h4>
+                  <p>"<%= testimonial.body %>" - <i><%= testimonial.person.name %>,&nbsp<%= testimonial.person.location %> </i></p>
+                </div>
+              <% })%>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="row">
+
+              <% testimonialsSlide2.forEach(function(testimonial){ %>
+                <div class="col-lg-4 review-box">
+                  <img class="rounded-circle" src="img/testimonials/<%= testimonial.person.imageName %>"  width="120" height="120">
+                  <h4> "<%= testimonial.title %>"</h4>
+                  <p>"<%= testimonial.body %>" - <i><%= testimonial.person.name %>,&nbsp<%= testimonial.person.location %> </i></p>
+                </div>
+              <% })%>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#testimonials" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#testimonials" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!--Featured Images-->
+    <section>
+    <div class="featured-images">
+      <% featuredImages.forEach(function(image){ %>
+      <img src="img/featured-img-home/<%= image %>" class="img-fluid featured-img">
+      <% }) %>
+    </div>
+    </section>
+
+<%- include('partials/footer') %>

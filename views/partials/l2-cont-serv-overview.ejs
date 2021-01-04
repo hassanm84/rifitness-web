@@ -1,0 +1,34 @@
+<div class="content-wrapper">
+<% var i=0; servCats.forEach(function(service){ if((i%2)===0){%>
+  <div class="row servOverviewRow">
+    <div class="col-lg-4 col-md-12 servOverviewColSm px-lg-3 px-md-0">
+      <div class="colTxtContainer">
+        <h3><%= service.title %></h3>
+        <p class="l2-sect-subhead-5">
+        <%= service.summary %>
+        </p>
+        <a href="<%= service.detPgLnk %>" class="btn btn-lg btn-outline-dark linkButton"><%= service.detBtnTxt %></a>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-12 servOverviewColLg pl-lg-3 px-md-0">
+    <img src="img/services-overview/<%= service.imgName %>"  class="img-responsive fit-image">
+    </div>
+  </div>
+  <% } else{ %>
+
+  <div class="row servOverviewRow">
+    <div class="col-lg-8 col-md-12 servOverviewColLg pr-lg-3 px-md-0">
+    <img src="img/services-overview/<%= service.imgName %>"  class="img-responsive fit-image">
+    </div>
+    <div class="col-lg-4 col-md-12 servOverviewColSm px-lg-3 px-md-0">
+      <div class="colTxtContainer">
+        <h3><%= service.title %></h3>
+        <p class="l2-sect-subhead-5">
+        <%= service.summary %>
+        </p>
+        <a href="<%= service.detPgLnk %>" class="btn btn-lg btn-outline-dark linkButton"><%= service.detBtnTxt %></a>
+      </div>
+    </div>
+  </div>
+  <% }i++;}); %>
+</div>

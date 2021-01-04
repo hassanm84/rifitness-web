@@ -1,0 +1,13 @@
+<div class="content-wrapper">
+  <div class="jumbotron subjectPageJt">
+    <% subjectSections.forEach(function(section){ %>
+    <h2><%= section.title %></h2>
+    <p class="lead"><%- section.body%></p>
+    <div class="btnsInline">
+      <a href="<%= enquiryBtnLnk %>" class="btn btn-lg btn-outline-dark linkButton adjacentBtns"><%= enquiryBtnTxt %></a>
+      <a href="<%= pkgsBtnLnk %>" class="btn btn-lg btn-outline-dark linkButton adjacentBtns"><%= pkgsBtnTxt %></a>
+    </div>
+    <hr class="my-4">
+    <% }) %>
+  </div>
+</div>

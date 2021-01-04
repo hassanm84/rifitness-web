@@ -1,0 +1,17 @@
+<div class="content-wrapper">
+    <div class="row content-block">
+      <% ovBlocks.forEach(function(ovBlock){ %>
+      <div class="col-lg-4" >
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <i class="fas <%= ovBlock.iconName %> fa-9x"></i>
+            <h3><%=ovBlock.title%></h3>
+            <div class="l2-sect-subhead"><p class="lead"><%=ovBlock.summary%></p></div>
+             <hr class="my-4">
+             <a href="<%= ovBlock.detailsPageLink %>" class="btn btn-lg btn-outline-dark linkButton"><%=ovBlock.buttonTxt%></a>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+  </div>
+</div>
