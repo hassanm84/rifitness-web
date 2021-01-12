@@ -41,6 +41,6 @@ app.use(function (req, res, next) {
 
 
 
-app.listen(3000, '127.0.0.1', function(){
-  console.log("Server started 🚀on port 3000.");
+app.listen(process.env.HOST_PORT, process.env.HOST_IPADDR, function(){
+  console.log("Server started 🚀 on port 3000.");
 });
