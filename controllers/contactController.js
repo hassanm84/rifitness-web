@@ -1,5 +1,5 @@
-const { check } = require('express-validator/check');
-const { validationResult } = require('express-validator/check');
+const { check } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 exports.personalTraining = function(req, res) {
   //Issue API requests to Strapi to retrieve content
