@@ -9,7 +9,7 @@ const contactController = require('../controllers/contactController');
 
 router.get('/personal-training', contactController.personalTraining);
 router.get('/corporate', contactController.corporate);
-router.get('/corporate', contactController.careers);
+router.get('/careers', contactController.careers);
 router.post('/personal-training', contactController.validate('formProcessor'), contactController.formProcessor);
 
 module.exports = router;

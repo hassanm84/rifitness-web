@@ -151,13 +151,13 @@ height: 350px; /* only if you want fixed height */
 .accordion-section .panel-default .panel-title a:after {
     font-family: 'FontAwesome';
     font-style: normal;
-    content: "\f067";
+    content: "\f068";
     color: #1f7de2;
     float: right;
     margin-top: -12px;
 }
 .accordion-section .panel-default .panel-title a.collapsed:after {
-    content: "\f068";
+    content: "\f067";
 }
 .accordion-section .panel-default .panel-body {
     font-size: 1.2rem;

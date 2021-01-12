@@ -1,11 +1,11 @@
 <div class="content-wrapper">
   <div class="cntPageSubHeading"><h3><%= formTitle %></h3></div>
-  <% console.log(validFlag); if(validFlag === 1){ %>
+  <% if(validFlag === 1){ %>
     <div id="formSubStatusTxt"><%= frmValdTxt %></div>
     <hr class="my-4">
     <% }else{%>
 
-    <% console.log(errors.length); if (errors.length !== 0){ %>
+    <% if (errors.length !== 0){ %>
     <div id="formErrMsg">
       The following validation errors were encountered.
 
@@ -13,8 +13,6 @@
       <% errors.forEach(function(error){ %>
         <br>
         <%= error.msg %>
-
-
       <% }) %>
     </div>
     <% } %>

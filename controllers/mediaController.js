@@ -1,45 +1,77 @@
 exports.pressCoverage = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Press Coverage | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-suzy-hazelwood-3866816.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Press Coverage";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "press-coverage";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "pressCoverage";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-   res.locals.contMainHeading="Watch this space!";
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
-};
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
+
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
+
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
+
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+      res.locals.contMainHeading =content.placeholderHeading1;
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "pressCoverage";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+}
 
 exports.blog = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Fitness Blog | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-victor-freitas-841130.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Fitness Blog";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "blog";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "blog";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-   res.locals.contMainHeading="Watch this space!";
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-};
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
+
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+      res.locals.contMainHeading =content.placeholderHeading1;
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "blog";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+}

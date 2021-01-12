@@ -1,146 +1,226 @@
 const { check } = require('express-validator/check');
 const { validationResult } = require('express-validator/check');
+
 exports.personalTraining = function(req, res) {
-   //Make API calls to Strapi to get the content and then render it into the template
-   //Title
-   res.locals.title = "Contact | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "hiit-rifitness.jpeg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   const errors =[];
-   res.locals.errors=errors;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "contact-pt";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   //Banner Heading
-   const l2BannerHeading1 = "Contact";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  http.get(url, function(apiRes){
+    let data="";
 
-   res.locals.pageType = "contact-pt";
-   const validFlag = 2;
-   res.locals.validFlag = 2;
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-   //Content
-   res.locals.formTitle="Complimentary Initial Consultation";
-   res.locals.formSbtBtnTxt="Send Enquiry";
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-   res.locals.nxtStp1IconName = "fa-envelope";
-   res.locals.nxtStp2IconName = "fa-calendar-alt";
-   res.locals.nxtStp3IconName = "fa-user-check";
-   res.locals.nxtStp1Txt = "eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a cras semper auctor neque vitae tempus quam pellentesque nec nam aliquam sem et tortor consequat id porta nibh venenatis cras sed felis eget velit aliquet";
-   res.locals.nxtStp2Txt = "eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a cras semper";
-   res.locals.nxtStp3Txt = "eget lorem dolor sed viverra ipsum nunc aliquet";
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
-};
+
+
+      const errors =[];
+      res.locals.errors=errors;
+
+      //Banner Heading
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+
+      res.locals.pageType = "contact-pt";
+      const validFlag = 2;
+      res.locals.validFlag = 2;
+
+      //Content
+      res.locals.formTitle  = content.formTitle;
+      res.locals.formSbtBtnTxt= content.formSbtBtnTxt;
+
+      res.locals.nxtStp1IconName = content.nxtStp1IconName;
+      res.locals.nxtStp2IconName = content.nxtStp2IconName;
+      res.locals.nxtStp3IconName = content.nxtStp3IconName;
+      res.locals.nxtStp1Txt = content.nxtStp1Txt;
+      res.locals.nxtStp2Txt = content.nxtStp2Txt;
+      res.locals.nxtStp3Txt = content.nxtStp3Txt;
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "contact-pt";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+}
 
 exports.corporate = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Corporate Workshops| RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-victor-freitas-841130.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Corporate Workshops";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "contact-cw";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "corporate";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-   res.locals.contMainHeading="Watch this space!";
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
+
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
+
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+      res.locals.contMainHeading =content.placeholderHeading1;
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "corporate";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
 
 };
 
 exports.careers = function(req, res) {
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
+
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "careers";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
+
+  http.get(url, function(apiRes){
+    let data="";
+
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
+
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
+
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
+
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+      res.locals.contMainHeading =content.placeholderHeading1;
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "careers";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
 
 };
-
-
-
-
-
 
 
 exports.formProcessor = function(req, res) {
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Contact | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "hiit-rifitness.jpeg"
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "contact-pt";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   //Banner Heading
-   const l2BannerHeading1 = "Contact";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  http.get(url, function(apiRes){
+    let data="";
 
-   res.locals.pageType = "contact-pt";
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-   //Content
-   res.locals.formTitle="Complimentary Initial Consultation";
-   res.locals.formSbtBtnTxt="Send Enquiry";
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-   res.locals.nxtStp1IconName = "fa-envelope";
-   res.locals.nxtStp2IconName = "fa-calendar-alt";
-   res.locals.nxtStp3IconName = "fa-user-check";
-   res.locals.nxtStp1Txt = "eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a cras semper auctor neque vitae tempus quam pellentesque nec nam aliquam sem et tortor consequat id porta nibh venenatis cras sed felis eget velit aliquet";
-   res.locals.nxtStp2Txt = "eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a cras semper";
-   res.locals.nxtStp3Txt = "eget lorem dolor sed viverra ipsum nunc aliquet";
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
+      var errors =[];
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
+      //Banner Heading
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
 
+      res.locals.pageType = "contact-pt";
 
+      //Content
+      res.locals.formTitle  = content.formTitle;
+      res.locals.formSbtBtnTxt= content.formSbtBtnTxt;
 
-  //Process contact form data
-  console.log(req.body);
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    let frmValdStat = false;
-     //res.status(422).json({ errors: errors.array() });
-     //return;
-     console.log(errors.array());
-     var validFlag= 0;
-     res.locals.validFlag =validFlag;
-     res.locals.errors = errors.array();
-     res.render("subjectPage" )
-   }
-   else{
-     let frmValdTxt = "Your enquiry has been submitted. We will be in contact in the next 2 days.";
-     var validFlag= 1;
-     res.locals.validFlag= validFlag;
-     res.locals.frmValdTxt=frmValdTxt;
-     res.render("subjectPage");
-   }
+      res.locals.nxtStp1IconName = content.nxtStp1IconName;
+      res.locals.nxtStp2IconName = content.nxtStp2IconName;
+      res.locals.nxtStp3IconName = content.nxtStp3IconName;
+      res.locals.nxtStp1Txt = content.nxtStp1Txt;
+      res.locals.nxtStp2Txt = content.nxtStp2Txt;
+      res.locals.nxtStp3Txt = content.nxtStp3Txt;
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "contact-pt";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
 
-};
+      //Process contact form data
+      errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        let frmValdStat = false;
+         //res.status(422).json({ errors: errors.array() });
+         //return;
+         var validFlag= 0;
+         res.locals.validFlag =validFlag;
+         res.locals.errors = errors.array();
+         res.render("subjectPage" )
+       }
+       else{
+         let frmValdTxt = "Your enquiry has been submitted. We will be in contact in the next 2-3 days.";
+         var validFlag= 1;
+         res.locals.validFlag= validFlag;
+         res.locals.frmValdTxt=frmValdTxt;
+         res.render("subjectPage");
+       }
+    });
+  });
+}
 
 
 exports.validate = (method) => {
-  console.log("Inside the validate function:" + method);
   switch (method) {
-
     case 'formProcessor': {
-
      return [
         check('fName', 'Invalid first name').exists().notEmpty(),
         check('lName', 'Invalid last name').exists().notEmpty(),
         check('phone', 'Invalid telephone number').exists().isNumeric(),
         check('email', 'Invalid email').isEmail(),
         check('message', 'Invalid input in message field').exists().notEmpty()
-
        ]
     }
   }

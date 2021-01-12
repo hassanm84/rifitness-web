@@ -1,350 +1,393 @@
 exports.index = function(req, res) {
-    //Make API calls to Strapi to get the content and then render it into the template
-    //Title
-     res.locals.title = "Services | RiFitness";
-     //Banner image
-     res.locals.l2BannerImg = "pexels-pixabay-416717.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-     //Banner Heading
-     const l2BannerHeading1 = "Our Services";
-     res.locals.l2BannerHeading1 = l2BannerHeading1;
-     //Template variables for the content section
-     const servCats = [{ "title": "HIGH INTENSITY INTERVAL TRAINING",
-                         "summary":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu." ,
-                         "detBtnTxt": "Learn More",
-                         "imgName": "pexels-ivan-samkov-4164658.jpg",
-                         "detPgLnk": "/services/high-intensity-interval-training"
-                       },
-                        { "title": "Strength Training",
-                        "summary":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu." ,
-                        "detBtnTxt": "Learn More",
-                        "imgName": "pexels-victor-freitas-791762.jpg",
-                        "detPgLnk": "/services/strength-training"
-                        },
-                        { "title": "Hypertrophy",
-                        "summary":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu." ,
-                        "detBtnTxt": "Learn More",
-                        "imgName": "pexels-victor-freitas-949129.jpg",
-                        "detPgLnk": "/services/hypertrophy"
-                        },
-                        { "title": "Weight Loss Training",
-                        "summary":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu." ,
-                        "detBtnTxt": "Learn More",
-                        "imgName": "pexels-andrea-piacquadio-3757957.jpg",
-                        "detPgLnk": "/services/weight-loss"
-                        },
-                        { "title": "Yoga",
-                        "summary":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu." ,
-                        "detBtnTxt": "Learn More",
-                        "imgName": "pexels-tima-miroshnichenko-5928615.jpg",
-                        "detPgLnk": "/services/yoga"
-                        },
-                        { "title": "Nutrition Coaching",
-                        "summary":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu." ,
-                        "detBtnTxt": "Learn More",
-                        "imgName": "pexels-foodie-factor-566566.jpg",
-                        "detPgLnk": "/services/nutrition-coaching"
-                        }
-                     ];
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "services-overview";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-     res.locals.servCats = servCats;
-     // Template variables for the 'Footer' section
-     const today = new Date();
-     const year = today.getFullYear();
-     res.locals.copyrightYr = year;
+  http.get(url, function(apiRes){
+    let data="";
 
-     res.render("servicesOverview");
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
+
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
+
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
+
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+
+      res.locals.servCats =content.services_ov_blocks;
+      res.locals.pageType = "faqs";
+
+      // Template variables for the 'Footer' section
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("servicesOverview");
+    });
+  });
+
 };
 
 exports.hiit = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "HIIT | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "hiit-rifitness.jpeg"
 
-   //Banner Heading
-   const l2BannerHeading1 = "High Intensity Interval Training";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   res.locals.pageType = "services";
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "hiit-page";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   //Content
-    const subjectSections = [{
-    "title":"Full Body HIIT",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet. <br><br>Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est."
-    },
-    {
-    "title":"Cardio HIIT",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet.<br><br> Tempus quam pellentesque nec nam aliquam sem et. Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est. Porttitor lacus luctus accumsan tortor posuere ac. Eget aliquet nibh praesent tristique magna sit. A orci sagittis eu volutpat. Pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus."
-    }
-    ];
-    res.locals.subjectSections = subjectSections;
+  http.get(url, function(apiRes){
+    let data="";
 
-    const enquiryBtnTxt = "Enquire Now";
-    res.locals.enquiryBtnTxt = enquiryBtnTxt;
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-    const enquiryBtnLnk ="/contact/personal-training";
-    res.locals.enquiryBtnLnk = enquiryBtnLnk;
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-    const pkgsBtnTxt = "View Packages";
-    res.locals.pkgsBtnTxt = pkgsBtnTxt;
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-    const pkgsBtnLnk ="/services/packages";
-    res.locals.pkgsBtnLnk = pkgsBtnLnk;
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
-};
+      res.locals.enquiryBtnTxt =content.enquiryBtnTxt;
+      res.locals.enquiryBtnLnk = content.enquiryBtnLnk;
+      res.locals.pkgsBtnTxt = content.pkgsBtnTxt;
+      res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
+
+      res.locals.subjectSections = [{"title": content.subjectSect1Title,
+                              "body": content.subjectSect1Body
+                            },
+                            {"title": content.subjectSect2Title,
+                              "body": content.subjectSect2Body
+                            }
+                           ];
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "services";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+}
 
 exports.strengthTraining = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Strength Training | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-victor-freitas-841130.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Strength Training";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "st-page";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "services";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-    const subjectSections = [{
-    "title":"Strength Training Aligned with Your Goals",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet. <br><br>Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est."
-    }
-    ];
-    res.locals.subjectSections = subjectSections;
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-    const enquiryBtnTxt = "Enquire Now";
-    res.locals.enquiryBtnTxt = enquiryBtnTxt;
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-    const enquiryBtnLnk ="/contact/personal-training";
-    res.locals.enquiryBtnLnk = enquiryBtnLnk;
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-    const pkgsBtnTxt = "View Packages";
-    res.locals.pkgsBtnTxt = pkgsBtnTxt;
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
 
-    const pkgsBtnLnk ="/services/packages";
-    res.locals.pkgsBtnLnk = pkgsBtnLnk;
+      res.locals.enquiryBtnTxt =content.enquiryBtnTxt;
+      res.locals.enquiryBtnLnk = content.enquiryBtnLnk;
+      res.locals.pkgsBtnTxt = content.pkgsBtnTxt;
+      res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
+      res.locals.subjectSections = [{"title": content.subjectSect1Title,
+                              "body": content.subjectSect1Body
+                            }
+                           ];
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "services";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
 
 };
 
 exports.hypertrophy = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Hypertrophy Training | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-pixabay-50597.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Hypertrophy Training";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "hypertrophy-page";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "services";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-    const subjectSections = [{
-    "title":"Build the RiFitness Way!",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet. <br><br>Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est."
-    },
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-    ];
-    res.locals.subjectSections = subjectSections;
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-    const enquiryBtnTxt = "Enquire Now";
-    res.locals.enquiryBtnTxt = enquiryBtnTxt;
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-    const enquiryBtnLnk ="/contact/personal-training";
-    res.locals.enquiryBtnLnk = enquiryBtnLnk;
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
 
-    const pkgsBtnTxt = "View Packages";
-    res.locals.pkgsBtnTxt = pkgsBtnTxt;
-
-    const pkgsBtnLnk ="/services/packages";
-    res.locals.pkgsBtnLnk = pkgsBtnLnk;
-
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
+      res.locals.enquiryBtnTxt =content.enquiryBtnTxt;
+      res.locals.enquiryBtnLnk = content.enquiryBtnLnk;
+      res.locals.pkgsBtnTxt = content.pkgsBtnTxt;
+      res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
 
 
-};
+      res.locals.subjectSections = [{"title": content.subjectSect1Title,
+                              "body": content.subjectSect1Body
+                            }
+                           ];
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "services";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+}
 
 exports.weightLoss = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Weight Loss | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-william-choquette-1954524.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Weight Loss Training";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "wt-page";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "services";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-    const subjectSections = [{
-    "title":"Empirically Proven Weight Loss Training Programmes",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet. <br><br>Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est."
-    }
-    ];
-    res.locals.subjectSections = subjectSections;
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-    const enquiryBtnTxt = "Enquire Now";
-    res.locals.enquiryBtnTxt = enquiryBtnTxt;
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-    const enquiryBtnLnk ="/contact/personal-training";
-    res.locals.enquiryBtnLnk = enquiryBtnLnk;
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-    const pkgsBtnTxt = "View Packages";
-    res.locals.pkgsBtnTxt = pkgsBtnTxt;
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
 
-    const pkgsBtnLnk ="/services/packages";
-    res.locals.pkgsBtnLnk = pkgsBtnLnk;
+      res.locals.enquiryBtnTxt =content.enquiryBtnTxt;
+      res.locals.enquiryBtnLnk = content.enquiryBtnLnk;
+      res.locals.pkgsBtnTxt = content.pkgsBtnTxt;
+      res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
 
-};
+      res.locals.subjectSections = [{"title": content.subjectSect1Title,
+                              "body": content.subjectSect1Body
+                            }
+                           ];
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "services";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+
+}
 
 exports.yoga = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Yoga | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-tima-miroshnichenko-5928615.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Yoga";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "yoga-page";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "services";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-    const subjectSections = [{
-    "title":"Do Yoga the RiFitness Way!",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet. <br><br>Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est."
-    }
-    ];
-    res.locals.subjectSections = subjectSections;
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-    const enquiryBtnTxt = "Enquire Now";
-    res.locals.enquiryBtnTxt = enquiryBtnTxt;
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-    const enquiryBtnLnk ="/contact/personal-training";
-    res.locals.enquiryBtnLnk = enquiryBtnLnk;
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-    const pkgsBtnTxt = "View Packages";
-    res.locals.pkgsBtnTxt = pkgsBtnTxt;
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
 
-    const pkgsBtnLnk ="/services/packages";
-    res.locals.pkgsBtnLnk = pkgsBtnLnk;
+      res.locals.enquiryBtnTxt =content.enquiryBtnTxt;
+      res.locals.enquiryBtnLnk = content.enquiryBtnLnk;
+      res.locals.pkgsBtnTxt = content.pkgsBtnTxt;
+      res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
 
-};
+      res.locals.subjectSections = [{"title": content.subjectSect1Title,
+                              "body": content.subjectSect1Body
+                            }
+                           ];
+
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "services";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+
+}
 
 exports.nutritionCoaching = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Nutrition Coaching | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-foodie-factor-566566.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Nutrition Coaching";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "nutrition-coaching";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "services";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-    const subjectSections = [{
-    "title":"Bespoke Goal-Oriented Diet Plans",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet. <br><br>Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est."
-    }
-    ];
-    res.locals.subjectSections = subjectSections;
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-    const enquiryBtnTxt = "Enquire Now";
-    res.locals.enquiryBtnTxt = enquiryBtnTxt;
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-    const enquiryBtnLnk ="/contact/personal-training";
-    res.locals.enquiryBtnLnk = enquiryBtnLnk;
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-    const pkgsBtnTxt = "View Packages";
-    res.locals.pkgsBtnTxt = pkgsBtnTxt;
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+      res.locals.enquiryBtnTxt =content.enquiryBtnTxt;
+      res.locals.enquiryBtnLnk = content.enquiryBtnLnk;
+      res.locals.pkgsBtnTxt = content.pkgsBtnTxt;
+      res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
 
-    const pkgsBtnLnk ="/services/packages";
-    res.locals.pkgsBtnLnk = pkgsBtnLnk;
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
+      res.locals.subjectSections = [{"title": content.subjectSect1Title,
+                              "body": content.subjectSect1Body
+                            }
+                           ];
 
-};
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "services";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+
+}
 
 
 exports.packages = function(req, res) {
-  //Make API calls to Strapi to get the content and then render it into the template
-  //Title
-   res.locals.title = "Personal Training Packages | RiFitness";
-   //Banner image
-   res.locals.l2BannerImg = "pexels-victor-freitas-841134.jpg"
+  //Issue API requests to Strapi to retrieve content
+  const https = require('https');
+  const http = require('http');
 
-   //Banner Heading
-   const l2BannerHeading1 = "Our Packages";
-   res.locals.l2BannerHeading1 = l2BannerHeading1;
+  const cmsHost = process.env.CMS_HOST;
+  const cmsPort = process.env.CMS_PORT;
+  const cmsBasePath = process.env.CMS_BASEPATH;
+  const rName = "packages-page";
+  const baseUrl="http://" + cmsHost + ":" + cmsPort;
+  const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-   res.locals.pageType = "packages";
+  http.get(url, function(apiRes){
+    let data="";
 
-   //Content
-    const subjectSections = [{
-    "title":"Monthly Subscription Options",
-    "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel eros donec. Suspendisse sed nisi lacus sed. Et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Elementum nisi quis eleifend quam. Id nibh tortor id aliquet. Maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Justo laoreet sit amet cursus sit amet dictum sit amet. <br><br>Dignissim convallis aenean et tortor at risus viverra. Sed blandit libero volutpat sed. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est."
-    }
-    ];
-    res.locals.subjectSections = subjectSections;
+    apiRes.on('data', function(chunk){
+      data += chunk;
+    });
 
-    const enquiryBtnTxt = "Enquire Now";
-    res.locals.enquiryBtnTxt = enquiryBtnTxt;
+    apiRes.on('end', function(){
+      let content = JSON.parse(data);
 
-    const enquiryBtnLnk ="/contact/personal-training";
-    res.locals.enquiryBtnLnk = enquiryBtnLnk;
+      res.locals.baseUrl= baseUrl;
+      res.locals.title = content.title;
 
-    const pkgsBtnTxt = "View Packages";
-    res.locals.pkgsBtnTxt = pkgsBtnTxt;
+      res.locals.l2BannerImg = content.l2BannerImg.url;
+      res.locals.l2BannerHeading1 = content.l2BannerHeading1;
+      res.locals.enquiryBtnTxt =content.enquiryBtnTxt;
+      res.locals.enquiryBtnLnk = content.enquiryBtnLnk;
+      res.locals.pkgsBtnTxt = content.pkgsBtnTxt;
+      res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
 
-    const pkgsBtnLnk ="/services/packages";
-    res.locals.pkgsBtnLnk = pkgsBtnLnk;
 
-   // Template variables for the 'Footer' section
-   const today = new Date();
-   const year = today.getFullYear();
-   res.locals.copyrightYr = year;
-   res.render("subjectPage");
+      res.locals.subjectSections = [{"title": content.subjectSect1Title,
+                              "body": content.subjectSect1Body
+                            }
+                           ];
+      res.locals.subscription_plans= content.subscription_plans;
 
-};
+      // Template variables for the 'Footer' section
+      res.locals.pageType = "packages";
+      const today = new Date();
+      const year = today.getFullYear();
+      res.locals.copyrightYr = year;
+      res.render("subjectPage");
+    });
+  });
+
+
+
+
+}

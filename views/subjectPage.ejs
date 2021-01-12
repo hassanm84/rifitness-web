@@ -14,8 +14,10 @@
 <%- include('partials/l2-content-press.ejs') %>
 <% } else if(pageType === "corporate"){ %>
 <%- include('partials/l2-content-press.ejs') %>
-<% }else{ %>
+<% } else if(pageType === "careers"){ %>
+<%- include('partials/l2-content-careers.ejs') %>
+<% }else if(pageType === "faqs"){ %>
 <%- include('partials/faqs.ejs') %>
-<% }%>
+<% }else{}%>
 
 <%- include('partials/footer') %>

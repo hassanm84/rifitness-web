@@ -10,7 +10,7 @@ exports.index = function(req, res) {
     const baseUrl="http://" + cmsHost + ":" + cmsPort;
     const url="http://" + cmsHost + ":" + cmsPort + cmsBasePath + rName;
 
-
+    console.log(url);
     http.get(url, function(apiRes){
       let data="";
 
@@ -46,23 +46,23 @@ exports.index = function(req, res) {
 
         res.locals.packagesHeading = content.packagesHeading;
         res.locals.packagesDetailBtnTxt = content.packagesDetailBtnTxt;
-        res.locals.packagesBannerImg = baseUrl + content.packagesBannerImage.url;
+        res.locals.packagesBannerImg = content.packagesBannerImage.url;
         res.locals.pkgsBtnLnk = content.pkgsBtnLnk;
         res.locals.testimonialsHeading = content.testimonialsHeading;
 
         res.locals.bannerImages=[
-                            baseUrl + content.bannerImage1.url,
-                            baseUrl + content.bannerImage2.url,
-                            baseUrl + content.bannerImage3.url,
-                            baseUrl + content.bannerImage2.url
+                            content.bannerImage1.url,
+                            content.bannerImage2.url,
+                            content.bannerImage3.url,
+                            content.bannerImage2.url
                           ];
 
         res.locals.testimonials = content.testimonials;
 
-        res.locals.featuredImages = [ baseUrl + content.lastSectImage1.url,
-                                 baseUrl + content.lastSectImage2.url,
-                                 baseUrl + content.lastSectImage3.url,
-                                 baseUrl + content.lastSectImage4.url
+        res.locals.featuredImages = [ content.lastSectImage1.url,
+                                 content.lastSectImage2.url,
+                                 content.lastSectImage3.url,
+                                 content.lastSectImage4.url
                                ];
 
 

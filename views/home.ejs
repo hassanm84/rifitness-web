@@ -79,7 +79,7 @@
               <div class="row">
               <% for(var i=0; i<3; i++){ %>
                 <div class="col-lg-4 review-box">
-                  <img class="rounded-circle" src="<%= baseUrl + testimonials[i].photo[0].url %>"  width="120" height="120">
+                  <img class="rounded-circle" src="<%=testimonials[i].photo[0].url %>"  width="120" height="120">
                   <h4> "<%= testimonials[i].title %>"</h4>
                   <p>"<%= testimonials[i].body %>" - <i><%= testimonials[i].name %>,&nbsp<%= testimonials[i].location %> </i></p>
                 </div>
@@ -92,9 +92,9 @@
 
               <% for(var j=3; j<6; j++){%>
                 <div class="col-lg-4 review-box">
-                  <img class="rounded-circle" src="<%= baseUrl + testimonials[i].photo[0].url %>"  width="120" height="120">
-                  <h4> "<%= testimonials[i].title %>"</h4>
-                  <p>"<%= testimonials[i].body %>" - <i><%= testimonials[i].name  %>,&nbsp<%= testimonials[i].location %> </i></p>
+                  <img class="rounded-circle" src="<%= testimonials[j].photo[0].url %>"  width="120" height="120">
+                  <h4> "<%= testimonials[j].title %>"</h4>
+                  <p>"<%= testimonials[j].body %>" - <i><%= testimonials[j].name  %>,&nbsp<%= testimonials[j].location %> </i></p>
                 </div>
               <% }%>
               </div>
