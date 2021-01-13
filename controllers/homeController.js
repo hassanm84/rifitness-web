@@ -54,7 +54,7 @@ exports.index = function(req, res) {
                             content.bannerImage1.url,
                             content.bannerImage2.url,
                             content.bannerImage3.url,
-                            content.bannerImage2.url
+                            content.bannerImage4.url
                           ];
 
         res.locals.testimonials = content.testimonials;
