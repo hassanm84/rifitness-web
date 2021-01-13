@@ -68,11 +68,11 @@ body {
 
 .l2-sect-subhead-5 {
 	overflow:hidden;
-	/*text-overflow:ellipsis;
+	text-overflow:ellipsis;
 	display:-webkit-box;
-	/*-webkit-line-clamp:5;
-	/* number of lines to show
-	-webkit-box-orient:vertical;*/
+	 -webkit-line-clamp:2;
+	number of lines to show
+	-webkit-box-orient:vertical;
 }
 .colTxtContainer {
 	position:relative;
